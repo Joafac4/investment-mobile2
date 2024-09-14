@@ -1,5 +1,6 @@
 package com.example.investment.investment
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,31 +13,44 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.investment.R
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.navigation.NavHostController
+import com.example.investment.navigation.InvestmentScreen
 
-@Preview
+
 @Composable
-fun InvestmentHome(){
+fun InvestmentHome(navController: NavHostController){
     Surface(modifier = Modifier.fillMaxSize()) {
         Text(text = "Simulate Investments")
         Column(modifier = Modifier.height(150.dp),
             verticalArrangement = Arrangement.Center
             ){
-            InvestmentCard("Stocks")
-            InvestmentCard("Crypto")
-            InvestmentCard("National Treasures")
+            InvestmentCard("Stocks",
+                onNavigate = { navController.navigate(InvestmentScreen.Simulation.name)}
+                    )
+            InvestmentCard("Crypto",
+                onNavigate = { navController.navigate(InvestmentScreen.Simulation.name)}
+                    )
+            InvestmentCard("National Treasures",
+                    onNavigate = { navController.navigate(InvestmentScreen.Simulation.name)}
+                )
+            InvestmentCard("Forex",
+                    onNavigate = { navController.navigate(InvestmentScreen.Simulation.name)}
+                )
+            InvestmentCard("Raws",
+                    onNavigate = { navController.navigate(InvestmentScreen.Simulation.name)}
+                )
         }
     }
 }
 
 
 @Composable
-fun InvestmentCard(investmentType: String){
-    Card(onClick = { /*TODO*/ },
+fun InvestmentCard(investmentType: String, onNavigate: () -> Unit){
+    Card(onClick = {  },
         modifier = Modifier
             .padding(8.dp)
             .padding(horizontal = 8.dp)
@@ -52,6 +66,9 @@ fun InvestmentCard(investmentType: String){
         ){
             Text(text = stringResource(id = R.string.investment_card_simulation),
                 color = colorResource(id = R.color.purple_500),
+                modifier = Modifier.clickable {
+                    onNavigate()
+                }
                 )
         }
     }

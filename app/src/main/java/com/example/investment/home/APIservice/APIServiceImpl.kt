@@ -1,6 +1,7 @@
 package com.example.investment.home.APIservice
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import com.example.investment.R
 import com.example.investment.home.viewModel.GlobalQuoteContainer
@@ -12,6 +13,7 @@ import retrofit.Callback
 import retrofit.Response
 
 class ApiServiceImpl @Inject constructor() {
+
 
     fun getGlobalQuote(context: Context, onSuccess: (GlobalQuoteContainer) -> Unit, onFail: () -> Unit, loadingFinished: () -> Unit) {
         val retrofit: Retrofit = Retrofit.Builder()
@@ -30,6 +32,9 @@ class ApiServiceImpl @Inject constructor() {
         val call2: Call<GlobalQuoteContainer> = service.getThirdGlobalQuote()
         val callList = listOf(call,call1,call2)
 
+
+
+
         enqueCalls(
             calls = callList,
             context = context,
@@ -44,6 +49,7 @@ class ApiServiceImpl @Inject constructor() {
         calls.forEach { it -> it.enqueue(object : Callback<GlobalQuoteContainer> {
             override fun onResponse(response: Response<GlobalQuoteContainer>?, retrofit: Retrofit?) {
                 loadingFinished()
+                Log.i("Response", "${response?.body()}")
                 if(response?.isSuccess == true) {
                     val globalQuoteContainer = response.body()
                     onSuccess(globalQuoteContainer)

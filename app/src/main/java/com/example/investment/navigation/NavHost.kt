@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.investment.home.HomePage
 import com.example.investment.investment.InvestmentHome
+import com.example.investment.investment.SimulationHome
 import com.example.investment.profile.Profile
 import com.example.investment.settings.Settings
 
@@ -25,13 +26,16 @@ fun NavHostComposable(innerPadding: PaddingValues, navController: NavHostControl
             HomePage()
         }
         composable(route = InvestmentScreen.Investments.name) {
-            InvestmentHome()
+            InvestmentHome(navController)
         }
         composable(route = InvestmentScreen.Profile.name) {
             Profile()
         }
         composable(route = InvestmentScreen.Settings.name) {
             Settings()
+        }
+        composable(route = InvestmentScreen.Simulation.name) {
+            SimulationHome()
         }
     }
 }

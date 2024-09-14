@@ -20,7 +20,7 @@ class StockRowModel @Inject constructor(
     private val _loadingStockBox = MutableStateFlow(false)
     val loadingStockBox = _loadingStockBox.asStateFlow()
 
-    private val _box= MutableStateFlow(listOf<GlobalQuoteContainer>())
+    private val _box = MutableStateFlow<List<GlobalQuoteContainer>>(emptyList())
     val box = _box.asStateFlow()
 
     private val _showRetry = MutableStateFlow(false)
@@ -38,9 +38,9 @@ class StockRowModel @Inject constructor(
         _loadingStockBox.value = true
         apiServiceImpl.getGlobalQuote(
             context = context,
-            onSuccess = {
+            onSuccess = { result ->
                 viewModelScope.launch {
-                    _box.emit(listOf(it))
+                    _box.emit(_box.value + result)
                 }
                 _showRetry.value = false
             },

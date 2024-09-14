@@ -38,6 +38,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.colorResource
 import com.example.investment.home.viewModel.StockRowModel
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -207,9 +208,9 @@ fun StockRowElement(globalQuoteContainer: GlobalQuoteContainer){
             fontSize = 20.sp
             )
         Text(
-            text = "+" + globalQuoteContainer.globalQuote.change,
+            text = globalQuoteContainer.globalQuote.change,
             fontSize = 20.sp,
-            color = Color.Green
+            color = selectStockChangeColour(globalQuoteContainer.globalQuote.change)
         )
     }
 }
@@ -246,6 +247,14 @@ fun HomePage(
             NewsFeed()
         }
     }
+}
+
+fun selectStockChangeColour(change: String): Color{
+    val positiveOrNegative = change.get(0)
+    if (positiveOrNegative == '-'){
+        return Color.Red
+    }
+    return Color.Green
 }
 
 data class HomeButton(

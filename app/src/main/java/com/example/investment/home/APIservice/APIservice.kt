@@ -8,23 +8,26 @@ import retrofit.http.Query
 interface APIservice {
 
 
-    @GET("function=GLOBAL_QUOTE")
+    @GET("query")
     fun getGlobalQuote(
+        @Query("function") function: String = "GLOBAL_QUOTE",
         @Query("symbol") symbol: String = "IBM",
-        @Query("apikey") apikey: String = "595T7TD5E78XXRFV"
+        @Query("apikey") apikey: String = "OVQSF2G3RPX7NGS8"
     ): Call<GlobalQuoteContainer>
 
 
-    @GET("function=GLOBAL_QUOTE")
+    @GET("query")
     fun getSecondGlobalQuote(
-        @Query("symbol") symbol: String = "GOOGLE",
-        @Query("apikey") apikey: String = "595T7TD5E78XXRFV"
+        @Query("function") function: String = "GLOBAL_QUOTE",
+        @Query("symbol") symbol: String = "GOOGL",
+        @Query("apikey") apikey: String = "OVQSF2G3RPX7NGS8"
     ): Call<GlobalQuoteContainer>
 
-    @GET("function=GLOBAL_QUOTE")
+    @GET("query")
     fun getThirdGlobalQuote(
-        @Query("symbol") symbol: String = "APPLE",
-        @Query("apikey") apikey: String = "595T7TD5E78XXRFV"
+        @Query("function") function: String = "GLOBAL_QUOTE",
+        @Query("symbol") symbol: String = "AAPL",
+        @Query("apikey") apikey: String = "OVQSF2G3RPX7NGS8"
     ): Call<GlobalQuoteContainer>
 
 }

@@ -4,5 +4,4 @@
     <string name="card_title"> Markets are on fire!!</string>
     <string name="card_subtitle"> Do not lose any opportunity on making gains </string>
     <string name="investment_card_simulation">Simulate</string>
-    <string name="alphavantage_url"> https://www.alphavantage.co/query </string>
 </resources>
