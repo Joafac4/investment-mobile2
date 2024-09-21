@@ -12,7 +12,7 @@ interface APIservice {
     fun getGlobalQuote(
         @Query("function") function: String = "GLOBAL_QUOTE",
         @Query("symbol") symbol: String = "IBM",
-        @Query("apikey") apikey: String = "OVQSF2G3RPX7NGS8"
+        @Query("apikey") apikey: String = "1BVR2NJBN38KOSJB"
     ): Call<GlobalQuoteContainer>
 
 
@@ -20,14 +20,14 @@ interface APIservice {
     fun getSecondGlobalQuote(
         @Query("function") function: String = "GLOBAL_QUOTE",
         @Query("symbol") symbol: String = "GOOGL",
-        @Query("apikey") apikey: String = "OVQSF2G3RPX7NGS8"
+        @Query("apikey") apikey: String = "1BVR2NJBN38KOSJB"
     ): Call<GlobalQuoteContainer>
 
     @GET("query")
     fun getThirdGlobalQuote(
         @Query("function") function: String = "GLOBAL_QUOTE",
         @Query("symbol") symbol: String = "AAPL",
-        @Query("apikey") apikey: String = "OVQSF2G3RPX7NGS8"
+        @Query("apikey") apikey: String = "1BVR2NJBN38KOSJB"
     ): Call<GlobalQuoteContainer>
 
 }

@@ -32,9 +32,6 @@ class ApiServiceImpl @Inject constructor() {
         val call2: Call<GlobalQuoteContainer> = service.getThirdGlobalQuote()
         val callList = listOf(call,call1,call2)
 
-
-
-
         enqueCalls(
             calls = callList,
             context = context,
@@ -49,7 +46,8 @@ class ApiServiceImpl @Inject constructor() {
         calls.forEach { it -> it.enqueue(object : Callback<GlobalQuoteContainer> {
             override fun onResponse(response: Response<GlobalQuoteContainer>?, retrofit: Retrofit?) {
                 loadingFinished()
-                Log.i("Response", "${response?.body()}")
+                Log.i("home Response", "Response body: ${response?.body()?.globalQuote}")
+                Log.i("home Response", "${response?.body()}")
                 if(response?.isSuccess == true) {
                     val globalQuoteContainer = response.body()
                     onSuccess(globalQuoteContainer)
