@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="alphavantage_url">https://www.alphavantage.co/</string>
+    <string name="financial_modeling_url">https://financialmodelingprep.com/api/v3/historical-price-full/</string>
 </resources>

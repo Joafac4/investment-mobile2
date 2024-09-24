@@ -1,6 +1,5 @@
 package com.example.investment.investment
 
-import android.util.Log
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -45,8 +44,11 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.investment.investment.viewModel.AnalyticsResponse
+import com.example.investment.investment.APIservice.HistoricalPriceResponse
 import com.example.investment.investment.viewModel.SimulationModel
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @Preview
 @Composable
@@ -54,7 +56,7 @@ fun SimulationHome() {
     val viewModel: SimulationModel = hiltViewModel<SimulationModel>()
     var selectedDate by remember { mutableStateOf("") } // Variable para almacenar la fecha seleccionada
     var selectedCompanies by remember { mutableStateOf(listOf<String>()) } // Variable para almacenar las empresas seleccionadas
-    val analytics by viewModel.analytics.collectAsState()
+    val historical by viewModel.historical.collectAsState()
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column {
@@ -66,7 +68,8 @@ fun SimulationHome() {
             }
             Button(
                 onClick = {
-                    viewModel.simulateInvestment(selectedDate, selectedCompanies.joinToString(","))
+                    selectedCompanies.forEach { selectedCompany ->
+                        viewModel.simulateInvestment(selectedDate,selectedCompany )}
                 },
                 modifier = Modifier
                     .padding(16.dp)
@@ -74,7 +77,7 @@ fun SimulationHome() {
             ) {
                 Text("Enviar")
             }
-            ShowSimulationResult(analytics)
+            ShowSimulationResult(historical, selectedDate)
         }
     }
 }
@@ -153,9 +156,9 @@ fun SelectSimulationDate(selectedDate: String, onDateSelected: (String) -> Unit)
     }
 }
 
-// Función para convertir milisegundos a una fecha en formato legible (dd/MM/yyyy por ejemplo)
+// Función para convertir milisegundos a una fecha en formato legible (yyyy-MM-dd por ejemplo)
 fun convertMillisToDate(millis: Long): String {
-    val formatter = java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.getDefault())
+    val formatter = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
     return formatter.format(java.util.Date(millis))
 }
 
@@ -215,16 +218,31 @@ fun ShowInvestmentOptions(selectedCompanies: List<String>, onCompaniesSelected: 
 @Composable
 fun ShowSimulationGraph(){}
 
+
 @Composable
-fun ShowSimulationResult(analyticsResponse: AnalyticsResponse?) {
-        val latestResults =
-            analyticsResponse?.payload?.return_calculations?.mean?.runningMean?.map { (symbol, values) ->
-                val latestDate = values.keys.maxByOrNull { it }
-                val latestMean = latestDate?.let { values[it] }
+fun ShowSimulationResult(historicalPriceResponses: List<HistoricalPriceResponse>, selectedDate: String){
+    historicalPriceResponses.forEach {  ShowSimulationPerResult(
+        historicalPriceResponse = it ,
+        selectedDate = selectedDate
+    )
+    }
+}
 
-                symbol to (latestDate to latestMean)
-            }
+@Composable
+fun ShowSimulationPerResult(historicalPriceResponse: HistoricalPriceResponse?, selectedDate: String) {
+    var closeValueOnSelectedDate : Double = 0.0
+    var closeValueToday : Double = 0.0
 
+    val today = getCurrentDate()
+
+    historicalPriceResponse?.historical?.forEach { historical ->
+        if(historical.date == selectedDate) {
+            closeValueOnSelectedDate = historical.close
+        }
+        if (historical.date == today) {
+            closeValueToday = historical.close
+        }
+    }
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -241,33 +259,43 @@ fun ShowSimulationResult(analyticsResponse: AnalyticsResponse?) {
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
 
-                latestResults?.forEach { (symbol, result) ->
-                    val (latestDate, latestMean) = result
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "$symbol (${latestDate ?: "No date"})",
-                            style = MaterialTheme.typography.titleLarge,
-                            modifier = Modifier.padding(end = 8.dp)
-                        )
-                        Text(
-                            text = "${
-                                latestMean?.let {
-                                    String.format(
-                                        "%.2f",
-                                        it * 100
-                                    )
-                                } ?: "No data"
-                            }%",
-                            style = MaterialTheme.typography.titleLarge
-                        )
-                    }
+
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = calculateEarnings(closeValueOnSelectedDate,closeValueToday),
+                        style = MaterialTheme.typography.titleLarge,
+                        modifier = Modifier.padding(end = 8.dp)
+                    )
+                    Text(
+                        text = calculateEarningsPercentage(closeValueOnSelectedDate,closeValueToday),
+                        style = MaterialTheme.typography.titleLarge
+                    )
                 }
             }
         }
 
+
 }
 
+fun getCurrentDate(): String {
+    val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    return sdf.format(Date())
+}
 
+fun calculateEarnings(investmentDateClose:Double, todayClose: Double) : String {
+    val earnings =  todayClose - investmentDateClose
+    return if(earnings > 0){
+        "+ ${earnings}"
+    }
+    else{
+        "- ${earnings}"
+    }
+}
+
+fun calculateEarningsPercentage(investmentDateClose:Double, todayClose: Double) : String {
+    val eranings =  todayClose - investmentDateClose
+    return eranings.toString()
+}

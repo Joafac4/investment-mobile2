@@ -3,8 +3,11 @@ package com.example.investment.navigation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.KeyboardArrowLeft
+import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
@@ -27,9 +30,9 @@ fun BottomBar(
 
     val homeTab = TabBarItem(title = InvestmentScreen.Home.name, selectedIcon = Icons.Filled.Home, unselectedIcon = Icons.Filled.Home)
     val investmentTab = TabBarItem(title = InvestmentScreen.Investments.name, selectedIcon = Icons.Filled.KeyboardArrowLeft, unselectedIcon = Icons.Outlined.KeyboardArrowLeft)
-    val settingsTab = TabBarItem(title = InvestmentScreen.Settings.name, selectedIcon = Icons.Filled.Settings, unselectedIcon = Icons.Outlined.Settings)
+    val historyTab = TabBarItem(title = InvestmentScreen.History.name, selectedIcon = Icons.Filled.List, unselectedIcon = Icons.Outlined.List)
 
-    val tabBarItems = listOf( investmentTab, homeTab, settingsTab)
+    val tabBarItems = listOf( investmentTab, homeTab, historyTab)
 
     TabView(tabBarItems, onNavigate)
 }

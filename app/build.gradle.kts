@@ -54,7 +54,7 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx.v283)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
@@ -74,6 +74,8 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-    implementation(libs.androidx.datastore.preferences)
     kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
 }

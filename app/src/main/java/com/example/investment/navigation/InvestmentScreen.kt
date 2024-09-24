@@ -5,14 +5,14 @@ enum class InvestmentScreen {
     Profile,
     Notifications,
     Investments,
-    Settings,
+    History,
     Simulation
 }
 
 val basePages = listOf(
     InvestmentScreen.Home.name,
     InvestmentScreen.Investments.name,
-    InvestmentScreen.Settings.name,
+    InvestmentScreen.History.name,
     InvestmentScreen.Notifications.name,
     InvestmentScreen.Profile.name,
     InvestmentScreen.Simulation.name,
