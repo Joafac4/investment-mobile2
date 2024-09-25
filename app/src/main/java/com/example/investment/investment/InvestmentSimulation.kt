@@ -1,5 +1,6 @@
 package com.example.investment.investment
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -17,10 +18,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -44,8 +47,12 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.investment.data.SimulationResult
+import com.example.investment.history.HistoryViewModel
 import com.example.investment.investment.APIservice.HistoricalPriceResponse
 import com.example.investment.investment.viewModel.SimulationModel
+import com.example.investment.ui.theme.PurpleGrey80
+import kotlinx.coroutines.flow.StateFlow
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -54,9 +61,12 @@ import java.util.Locale
 @Composable
 fun SimulationHome() {
     val viewModel: SimulationModel = hiltViewModel<SimulationModel>()
+    val loading: StateFlow<Boolean> = viewModel.loadingStockBox
     var selectedDate by remember { mutableStateOf("") } // Variable para almacenar la fecha seleccionada
     var selectedCompanies by remember { mutableStateOf(listOf<String>()) } // Variable para almacenar las empresas seleccionadas
     val historical by viewModel.historical.collectAsState()
+    var investmentAmount by remember { mutableStateOf(0.0) }
+    val roomViewModel: HistoryViewModel = hiltViewModel<HistoryViewModel>()
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column {
@@ -65,6 +75,9 @@ fun SimulationHome() {
             }
             ShowInvestmentOptions(selectedCompanies) { newCompanies ->
                 selectedCompanies = newCompanies
+            }
+            ShowInvestmentAmount { newAmount ->
+                investmentAmount = newAmount
             }
             Button(
                 onClick = {
@@ -77,7 +90,7 @@ fun SimulationHome() {
             ) {
                 Text("Enviar")
             }
-            ShowSimulationResult(historical, selectedDate)
+            ShowSimulationResult(historical, selectedDate, investmentAmount, roomViewModel,loading)
         }
     }
 }
@@ -163,6 +176,26 @@ fun convertMillisToDate(millis: Long): String {
 }
 
 
+@Composable
+fun ShowInvestmentAmount(onAmountChanged: (Double) -> Unit) {
+    var inputText by remember { mutableStateOf("") }  // Mantener el estado del texto
+
+    OutlinedTextField(
+        value = inputText,
+        onValueChange = { newText ->
+            inputText = newText
+            val amount = newText.toDoubleOrNull() ?: 0.0  // Convertir el texto a Double
+            onAmountChanged(amount)  // Notificar el cambio de monto
+        },
+        label = { Text("Enter Investment Amount") },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        singleLine = true
+    )
+}
+
+
 
 @Composable
 fun ShowInvestmentOptions(selectedCompanies: List<String>, onCompaniesSelected: (List<String>) -> Unit) {
@@ -220,19 +253,22 @@ fun ShowSimulationGraph(){}
 
 
 @Composable
-fun ShowSimulationResult(historicalPriceResponses: List<HistoricalPriceResponse>, selectedDate: String){
+fun ShowSimulationResult(historicalPriceResponses: List<HistoricalPriceResponse>, selectedDate: String, investmentAmount: Double, roomViewModel: HistoryViewModel, loading: StateFlow<Boolean>){
     historicalPriceResponses.forEach {  ShowSimulationPerResult(
         historicalPriceResponse = it ,
-        selectedDate = selectedDate
+        selectedDate = selectedDate,
+        investmentAmount = investmentAmount,
+        roomViewModel = roomViewModel,
+        loading = loading
     )
     }
 }
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun ShowSimulationPerResult(historicalPriceResponse: HistoricalPriceResponse?, selectedDate: String) {
+fun ShowSimulationPerResult(loading: StateFlow<Boolean>,historicalPriceResponse: HistoricalPriceResponse?, selectedDate: String, investmentAmount: Double, roomViewModel: HistoryViewModel) {
     var closeValueOnSelectedDate : Double = 0.0
     var closeValueToday : Double = 0.0
-
     val today = getCurrentDate()
 
     historicalPriceResponse?.historical?.forEach { historical ->
@@ -243,6 +279,28 @@ fun ShowSimulationPerResult(historicalPriceResponse: HistoricalPriceResponse?, s
             closeValueToday = historical.close
         }
     }
+
+    val earnings = calculateEarnings(closeValueOnSelectedDate,closeValueToday,investmentAmount)
+    val earningsPercentage = calculateEarningsPercentage(closeValueOnSelectedDate,closeValueToday)
+    val symbol = historicalPriceResponse?.symbol
+    if (symbol == null) {
+        Text("Error: Symbol is null")
+        return
+    }
+
+    if(loading.value) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .size(64.dp)
+                    .align(Alignment.Center),
+                color = PurpleGrey80,
+                trackColor = PurpleGrey80,
+            )
+
+        }
+    }
+
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -265,18 +323,27 @@ fun ShowSimulationPerResult(historicalPriceResponse: HistoricalPriceResponse?, s
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = calculateEarnings(closeValueOnSelectedDate,closeValueToday),
+                        text = earnings,
                         style = MaterialTheme.typography.titleLarge,
-                        modifier = Modifier.padding(end = 8.dp)
+                        modifier = Modifier.padding(end = 8.dp),
+                        color = getResultColor(earnings)
                     )
                     Text(
-                        text = calculateEarningsPercentage(closeValueOnSelectedDate,closeValueToday),
-                        style = MaterialTheme.typography.titleLarge
+                        text = earningsPercentage,
+                        style = MaterialTheme.typography.titleLarge,
+                        color = getResultColor(earningsPercentage)
                     )
                 }
             }
         }
 
+    val simulationResult = SimulationResult(
+        resourceSimulated = symbol,
+        simulationDate = today,
+        simulationResult = earnings,
+        simulationResultPercentage = earningsPercentage
+    )
+    roomViewModel.addSimulation(simulationResult)
 
 }
 
@@ -285,17 +352,30 @@ fun getCurrentDate(): String {
     return sdf.format(Date())
 }
 
-fun calculateEarnings(investmentDateClose:Double, todayClose: Double) : String {
-    val earnings =  todayClose - investmentDateClose
+fun calculateEarnings(investmentDateClose:Double, todayClose: Double, investmentAmount: Double) : String {
+    val earnings =  investmentAmount * todayClose - investmentAmount * investmentDateClose
     return if(earnings > 0){
-        "+ ${earnings}"
+        "+ ${Math.round(earnings)}"
     }
     else{
-        "- ${earnings}"
+        "- ${Math.round(earnings)}"
     }
 }
 
 fun calculateEarningsPercentage(investmentDateClose:Double, todayClose: Double) : String {
-    val eranings =  todayClose - investmentDateClose
-    return eranings.toString()
+    val eranings =    (todayClose * 100)/ investmentDateClose
+    if (eranings > 100){
+        return "+ %${eranings -100}"
+    }
+    else{
+        return "- %${100 - eranings}"
+    }
+
+}
+
+fun getResultColor(result: String): Color{
+    if (result.get(0) == '+'){
+        return Color.Green
+    }
+    return Color.Red
 }

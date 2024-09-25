@@ -59,7 +59,7 @@ fun SimulationHistoryCard(simulationResult: SimulationResult) {
                 .padding(16.dp)
         ) {
             Text(
-                text = formatDate(simulationResult.simulationDate),
+                text = simulationResult.simulationDate,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -75,6 +75,12 @@ fun SimulationHistoryCard(simulationResult: SimulationResult) {
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = "Resultado: ${simulationResult.simulationResult}",
+                fontSize = 14.sp,
+                modifier = Modifier.align(Alignment.Start)
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "Resultado Porcentual: ${simulationResult.simulationResultPercentage}",
                 fontSize = 14.sp,
                 modifier = Modifier.align(Alignment.Start)
             )

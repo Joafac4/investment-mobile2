@@ -28,10 +28,6 @@ class SimulationModel @Inject constructor(
     val showRetry = _showRetry.asStateFlow()
 
 
-    fun retrySimulation() {
-        simulateInvestment("1","IBM")
-    }
-
     fun simulateInvestment(date: String, symbol: String) {
         _loadingStockBox.value = true
         apiServiceImpl.getHistosicalResponse(

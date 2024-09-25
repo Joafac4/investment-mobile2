@@ -10,5 +10,6 @@ data class SimulationResult(
     val id: Long = 0,
     val resourceSimulated: String,
     val simulationResult: String,
-    val simulationDate: Long,
+    val simulationResultPercentage: String,
+    val simulationDate: String,
 )

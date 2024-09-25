@@ -17,8 +17,4 @@ interface SimulationResultDao {
     @Query("SELECT * FROM simulationResult")
     fun getAllSimulations(): LiveData<List<SimulationResult>>
 
-    @Query("SELECT * FROM simulationResult WHERE simulationDate >= :startDate")
-    fun getSimulationsFromLastTwoMonths(startDate: Long): LiveData<List<SimulationResult>>
-
-
 }
