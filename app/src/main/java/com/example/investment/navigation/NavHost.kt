@@ -13,29 +13,41 @@ import com.example.investment.history.SimulationHistory
 import com.example.investment.home.HomePage
 import com.example.investment.investment.InvestmentHome
 import com.example.investment.investment.SimulationHome
-import com.example.investment.profile.Profile
+import com.example.investment.investment.assetsHome.ShowCryptoHome
+import com.example.investment.investment.assetsHome.ShowForexHome
+import com.example.investment.investment.assetsHome.ShowRawsHome
+import com.example.investment.investment.assetsHome.ShowStockHome
 
 @Composable
 fun NavHostComposable(innerPadding: PaddingValues, navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = InvestmentScreen.Home.name,
-        modifier = Modifier.fillMaxSize().padding(innerPadding).padding(horizontal = 10.dp)
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding)
+            .padding(horizontal = 10.dp)
     ) {
         composable(route = InvestmentScreen.Home.name) {
-            HomePage()
+            HomePage(navController)
         }
         composable(route = InvestmentScreen.Investments.name) {
             InvestmentHome(navController)
         }
-        composable(route = InvestmentScreen.Profile.name) {
-            Profile()
-        }
         composable(route = InvestmentScreen.History.name) {
             SimulationHistory()
         }
-        composable(route = InvestmentScreen.Simulation.name) {
-            SimulationHome()
+        composable(route = InvestmentScreen.Crypto.name){
+            ShowCryptoHome()
+        }
+        composable(route = InvestmentScreen.Stock.name){
+            ShowStockHome()
+        }
+        composable(route = InvestmentScreen.Raws.name){
+            ShowRawsHome()
+        }
+        composable(route = InvestmentScreen.Forex.name){
+            ShowForexHome()
         }
     }
 }
