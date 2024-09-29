@@ -30,10 +30,17 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.investment.navigation.InvestmentScreen
 
+
+@Preview
+@Composable
+fun PreviewIHome(){
+    InvestmentCard(investmentType = "crypto", onNavigate = { /*TODO*/ }, urls = listOf(1) )
+}
 
 @Composable
 fun InvestmentHome(navController: NavHostController){
@@ -42,29 +49,34 @@ fun InvestmentHome(navController: NavHostController){
     val rawsUrls = listOf(R.drawable.gold,R.drawable.oil,R.drawable.trigo)
     val cryptoUrls = listOf(R.drawable.ethereum,R.drawable.bitcoin,R.drawable.solana)
     Surface(modifier = Modifier.fillMaxSize()) {
-        Text(text = "Simulate Investments")
+        Text(text = stringResource(id = R.string.investment_home))
         Column(modifier = Modifier.height(150.dp),
             verticalArrangement = Arrangement.Center
             ){
-            InvestmentCard("Stocks",
-                onNavigate = { navController.navigate(InvestmentScreen.Simulation.name)},
-                stockUrsl
+            InvestmentCard(
+                stringResource(id = R.string.investment_card_name_stock),
+                onNavigate = { navController.navigate(InvestmentScreen.Stock.name)},
+                stockUrsl,
                     )
-            InvestmentCard("Crypto",
-                onNavigate = { navController.navigate(InvestmentScreen.Simulation.name)},
-                cryptoUrls
+            InvestmentCard(
+                stringResource(id = R.string.investment_card_name_crypto),
+                onNavigate = { navController.navigate(InvestmentScreen.Crypto.name)},
+                cryptoUrls,
                     )
-            InvestmentCard("National Treasures",
-                    onNavigate = { navController.navigate(InvestmentScreen.Simulation.name)},
-                stockUrsl
+            InvestmentCard(
+                stringResource(id = R.string.investment_card_name_naturalTreasures),
+                    onNavigate = { navController.navigate(InvestmentScreen.Stock.name)},
+                stockUrsl,
                 )
-            InvestmentCard("Forex",
-                    onNavigate = { navController.navigate(InvestmentScreen.Simulation.name)},
-                forexUrls
+            InvestmentCard(
+                stringResource(id = R.string.investment_card_name_forex),
+                    onNavigate = { navController.navigate(InvestmentScreen.Forex.name)},
+                forexUrls,
                 )
-            InvestmentCard("Raws",
-                    onNavigate = { navController.navigate(InvestmentScreen.Simulation.name)},
-                rawsUrls
+            InvestmentCard(
+                stringResource(id = R.string.investment_card_name_raws),
+                    onNavigate = { navController.navigate(InvestmentScreen.Raws.name)},
+                rawsUrls,
                 )
         }
     }
@@ -118,7 +130,7 @@ fun InvestmentCard(investmentType: String, onNavigate: () -> Unit, urls : List<I
     }
 }
 
-@Composable()
+@Composable
 fun CardImage(imageUrl: Int ){
     Box(
         modifier = Modifier

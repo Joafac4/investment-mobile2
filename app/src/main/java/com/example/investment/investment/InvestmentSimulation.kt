@@ -44,9 +44,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.investment.R
 import com.example.investment.data.SimulationResult
 import com.example.investment.history.HistoryViewModel
 import com.example.investment.investment.APIservice.HistoricalPriceResponse
@@ -57,9 +59,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-@Preview
+
 @Composable
-fun SimulationHome() {
+fun SimulationHome(assets: List<String>) {
     val viewModel: SimulationModel = hiltViewModel<SimulationModel>()
     val loading: StateFlow<Boolean> = viewModel.loadingStockBox
     var selectedDate by remember { mutableStateOf("") } // Variable para almacenar la fecha seleccionada
@@ -73,7 +75,7 @@ fun SimulationHome() {
             SelectSimulationDate(selectedDate) { newDate ->
                 selectedDate = newDate
             }
-            ShowInvestmentOptions(selectedCompanies) { newCompanies ->
+            ShowInvestmentOptions(selectedCompanies,assets) { newCompanies ->
                 selectedCompanies = newCompanies
             }
             ShowInvestmentAmount { newAmount ->
@@ -88,7 +90,7 @@ fun SimulationHome() {
                     .padding(16.dp)
                     .fillMaxWidth()
             ) {
-                Text("Enviar")
+                Text(stringResource(id = R.string.investment_simulation_simulationButton))
             }
             ShowSimulationResult(historical, selectedDate, investmentAmount, roomViewModel,loading)
         }
@@ -111,13 +113,13 @@ fun SelectSimulationDate(selectedDate: String, onDateSelected: (String) -> Unit)
         OutlinedTextField(
             value = selectedDate,
             onValueChange = { },
-            label = { Text("DOI") },
+            label = { Text(stringResource(id = R.string.investment_simulation_datePicker_label)) },
             readOnly = true,
             trailingIcon = {
                 IconButton(onClick = { showDatePicker = true }) {
                     Icon(
                         imageVector = Icons.Default.DateRange,
-                        contentDescription = "Select date"
+                        contentDescription = stringResource(id = R.string.investment_simulation_datePicker_iconDescription)
                     )
                 }
             },
@@ -187,7 +189,7 @@ fun ShowInvestmentAmount(onAmountChanged: (Double) -> Unit) {
             val amount = newText.toDoubleOrNull() ?: 0.0  // Convertir el texto a Double
             onAmountChanged(amount)  // Notificar el cambio de monto
         },
-        label = { Text("Enter Investment Amount") },
+        label = { Text(stringResource(id = R.string.investment_simulation_investmentAmountInput_label)) },
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
@@ -198,8 +200,7 @@ fun ShowInvestmentAmount(onAmountChanged: (Double) -> Unit) {
 
 
 @Composable
-fun ShowInvestmentOptions(selectedCompanies: List<String>, onCompaniesSelected: (List<String>) -> Unit) {
-    val options = listOf("GOOGL", "AAPL", "IBM")
+fun ShowInvestmentOptions(selectedCompanies: List<String>, assets: List<String>,onCompaniesSelected: (List<String>) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
 
     Box(
@@ -214,7 +215,7 @@ fun ShowInvestmentOptions(selectedCompanies: List<String>, onCompaniesSelected: 
         )
 
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            options.forEach { option ->
+            assets.forEach { option ->
                 val isSelected = selectedCompanies.contains(option)
                 DropdownMenuItem(
                     text = {
@@ -312,7 +313,7 @@ fun ShowSimulationPerResult(loading: StateFlow<Boolean>,historicalPriceResponse:
                 verticalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = "Investment Results",
+                    text = stringResource(id = R.string.investment_simulation_card),
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
@@ -358,7 +359,7 @@ fun calculateEarnings(investmentDateClose:Double, todayClose: Double, investment
         "+ ${Math.round(earnings)}"
     }
     else{
-        "- ${Math.round(earnings)}"
+        " ${Math.round(earnings)}"
     }
 }
 

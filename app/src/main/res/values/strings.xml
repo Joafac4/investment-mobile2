@@ -3,5 +3,24 @@
     <string name="home_title"> Your finance </string>
     <string name="card_title"> Markets are on fire!!</string>
     <string name="card_subtitle"> Do not lose any opportunity on making gains </string>
+    <string name="investment_home">Simulate Investments</string>
+    <string name="investment_card_name_stock">Stocks</string>
+    <string name="investment_card_name_crypto">Crypto</string>
+    <string name="investment_card_name_raws">Raws</string>
+    <string name="investment_card_name_forex">Forex</string>
+    <string name="investment_card_name_naturalTreasures">Natural treasures</string>
     <string name="investment_card_simulation">Simulate</string>
+    <string name="investment_simulation_simulationButton">Simulate</string>
+    <string name="investment_simulation_datePicker_label">DOI</string>
+    <string name="investment_simulation_datePicker_iconDescription">Select date</string>
+    <string name="investment_simulation_investmentAmountInput_label">Enter Investment Amount</string>
+    <string name="investment_simulation_card">Investment Results</string>
+    <string name="historial_assetSimulado">Simulación de</string>
+    <string name="historial_resultadonominal">Resultado</string>
+    <string name="historial_resultadoPorcentual">Resultado porcentual</string>
+    <string name="news_feed">news feed</string>
+    <string name="news_user">_@WBuffet</string>
+    <string name="news_time">United Kingdom - 3 minutes ago</string>
+    <string name="news_tweet">I have made both, good and bad investments. But I only regret about one kind, the once I never made.</string>
+
 </resources>

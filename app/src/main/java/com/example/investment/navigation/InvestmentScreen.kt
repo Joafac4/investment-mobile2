@@ -6,7 +6,10 @@ enum class InvestmentScreen {
     Notifications,
     Investments,
     History,
-    Simulation
+    Crypto,
+    Raws,
+    Stock,
+    Forex
 }
 
 val basePages = listOf(
@@ -15,5 +18,8 @@ val basePages = listOf(
     InvestmentScreen.History.name,
     InvestmentScreen.Notifications.name,
     InvestmentScreen.Profile.name,
-    InvestmentScreen.Simulation.name,
+    InvestmentScreen.Crypto.name,
+    InvestmentScreen.Stock.name,
+    InvestmentScreen.Raws.name,
+    InvestmentScreen.Forex.name
 )
