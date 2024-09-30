@@ -3,6 +3,7 @@ package com.example.investment.investment.APIservice
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.ui.res.stringResource
 import com.example.investment.R
 import retrofit.GsonConverterFactory
 import retrofit.Retrofit
@@ -32,11 +33,7 @@ class ApiServiceImpl @Inject constructor() {
             override fun onResponse(response: Response<HistoricalPriceResponse>?, retrofit: Retrofit?) {
                 val rawJson = response?.errorBody()?.string() ?: response?.body().toString()
                 loadingFinished()
-                Log.i("rspones", "${response?.body()}")
-                Log.i("response status", "${response?.code()}")
                 if(response?.isSuccess == true) {
-                    Log.i("Raw JSON Response", rawJson)
-                    Log.i("simul Response", "${response?.body()}")
                     val historical_price : HistoricalPriceResponse = response.body()
                     onSuccess(historical_price)
                 } else {

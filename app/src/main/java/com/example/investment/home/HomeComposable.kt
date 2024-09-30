@@ -39,12 +39,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import com.example.investment.home.viewModel.StockRowModel
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.investment.R
@@ -57,7 +57,7 @@ fun Title() {
         ) {
         Text(
             text = stringResource(id = R.string.home_title),
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.sixteen)),
             textAlign = TextAlign.Center,
             fontSize = 32.sp,
             fontFamily = FontFamily.Serif,
@@ -74,16 +74,16 @@ fun InvestmentCard(navController: NavHostController){
         onClick = { /*TODO*/ },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(26.dp)
+            .padding(dimensionResource(id = R.dimen.h_invcard_padding))
             .wrapContentHeight()
-            .height(200.dp),
+            .height(dimensionResource(id = R.dimen.hom_investmentCard_height)),
         colors = CardDefaults.cardColors(
             containerColor = colorResource(id = R.color.superLightGolden)
         )
 
     ) {
         Column(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.sixteen))
         ) {
             Text(
                 text = stringResource(id = R.string.card_title),
@@ -94,13 +94,14 @@ fun InvestmentCard(navController: NavHostController){
                 fontSize = 12.sp
             )
         }
-        Row (modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp),
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(id = R.dimen.h_invcard_row_padding)),
             verticalAlignment = Alignment.Bottom,
             horizontalArrangement = Arrangement.SpaceBetween,
 
-        ){
+            ){
             ButtonWithIcons(
                 leadingIcon = button.leadingIcon,
                 title = button.title,
@@ -159,7 +160,7 @@ fun NewsFeed(){
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(dimensionResource(id = R.dimen.sixteen))
                 .clickable { isExpanded = !isExpanded },
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
@@ -176,12 +177,12 @@ fun NewsFeed(){
             enter = expandVertically(),
             exit = shrinkVertically()
         ) {
-            Column(modifier = Modifier.padding(16.dp)) {
+            Column(modifier = Modifier.padding(dimensionResource(id = R.dimen.sixteen))) {
                 Text(text = stringResource(id = R.string.news_user),
                     color = colorResource(id = R.color.purple_700)
                     )
                 Text(text = stringResource(id = R.string.news_time))
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_8)))
                 Text(
                     text = stringResource(id = R.string.news_tweet),
                 )
@@ -226,7 +227,7 @@ fun HomePage(navController: NavHostController
 
         Column  {
             Title()
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.sixteen)))
             InvestmentCard(navController)
             StockRow(boxes)
             NewsFeed()

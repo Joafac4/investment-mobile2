@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="sixteen">16dp</dimen>
+    <dimen name="hom_investmentCard_height">200dp</dimen>
+    <dimen name="h_invcard_padding">26dp</dimen>
+    <dimen name="h_invcard_row_padding">10dp</dimen>
+    <dimen name="spacer_8">8dp</dimen>
+    <dimen name="spacer_6">6dp</dimen>
+    <dimen name="simDate_height">64dp</dimen>
+    <dimen name="shadow">4dp</dimen>
+    <dimen name="box_shadow">30dp</dimen>
+    <dimen name="border">1dp</dimen>
+    <dimen name="simulation_investmentCard_height">120dp</dimen>
+    <dimen name="padding_5">5dp</dimen>
+    <dimen name="hegiht_80">80dp</dimen>
+    <dimen name="box_asset_img">45dp</dimen>
+</resources>

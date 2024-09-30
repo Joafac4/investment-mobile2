@@ -45,6 +45,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -89,7 +90,7 @@ fun SimulationHome(assets: List<String>) {
                         viewModel.simulateInvestment(selectedDate,selectedCompany )}
                 },
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(dimensionResource(id = R.dimen.sixteen))
                     .fillMaxWidth()
             ) {
                 Text(stringResource(id = R.string.investment_simulation_simulationButton))
@@ -127,7 +128,7 @@ fun SelectSimulationDate(selectedDate: String, onDateSelected: (String) -> Unit)
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(64.dp)
+                .height(dimensionResource(id = R.dimen.simDate_height))
         )
 
 
@@ -139,10 +140,10 @@ fun SelectSimulationDate(selectedDate: String, onDateSelected: (String) -> Unit)
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .offset(y = 64.dp)
-                        .shadow(elevation = 4.dp)
+                        .offset(y = dimensionResource(id = R.dimen.simDate_height))
+                        .shadow(elevation = dimensionResource(id = R.dimen.shadow))
                         .background(MaterialTheme.colorScheme.surface)
-                        .padding(30.dp)
+                        .padding(dimensionResource(id = R.dimen.box_shadow))
                 ) {
                     Column {
                         DatePicker(
@@ -161,7 +162,7 @@ fun SelectSimulationDate(selectedDate: String, onDateSelected: (String) -> Unit)
                             },
                             modifier = Modifier
                                 .align(Alignment.End)
-                                .padding(top = 16.dp)
+                                .padding(dimensionResource(id = R.dimen.sixteen))
                         ) {
                             Text("OK")
                         }
@@ -193,7 +194,7 @@ fun ShowInvestmentAmount(onAmountChanged: (Double) -> Unit) {
         label = { Text(stringResource(id = R.string.investment_simulation_investmentAmountInput_label)) },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(dimensionResource(id = R.dimen.sixteen)),
         singleLine = true
     )
 }
@@ -207,12 +208,12 @@ fun ShowInvestmentOptions(selectedCompanies: List<String>, assets: List<String>,
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .border(width = 1.dp, color = Color.Gray, shape = RectangleShape)
+            .border(width = dimensionResource(id = R.dimen.border), color = Color.Gray, shape = RectangleShape)
             .clickable { expanded = !expanded }
     ) {
         Text(
             text = if (selectedCompanies.isEmpty()) stringResource(id = R.string.investment_simulation_optionsTextfield) else selectedCompanies.joinToString(", "),
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.sixteen))
         )
 
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {

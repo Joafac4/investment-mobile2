@@ -27,8 +27,12 @@ import com.example.investment.R
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.PointerIcon.Companion.Hand
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
@@ -52,7 +56,7 @@ fun InvestmentHome(navController: NavHostController){
     val cryptoUrls = listOf(R.drawable.ethereum,R.drawable.bitcoin,R.drawable.solana)
     Surface(modifier = Modifier.fillMaxSize()) {
         Text(text = stringResource(id = R.string.investment_home),
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.sixteen)),
             textAlign = TextAlign.Center,
             fontSize = 16.sp,
             fontFamily = FontFamily.Serif,
@@ -95,35 +99,36 @@ fun InvestmentHome(navController: NavHostController){
 fun InvestmentCard(investmentType: String, onNavigate: () -> Unit, urls : List<Int>){
     Card(
         modifier = Modifier
-            .padding(8.dp)
-            .padding(horizontal = 8.dp)
+            .padding(dimensionResource(id = R.dimen.spacer_8))
+            .padding(horizontal = dimensionResource(id = R.dimen.spacer_8))
             .wrapContentHeight()
-            .height(120.dp)
+            .height(dimensionResource(id = R.dimen.simulation_investmentCard_height))
             .fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = colorResource(id = R.color.superLightGolden)
         ),
-        border = BorderStroke(0.95.dp, colorResource(id = R.color.purple_700))
+        border = BorderStroke(dimensionResource(id = R.dimen.border), colorResource(id = R.color.purple_700))
     )  {
         Row (horizontalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = investmentType,
-                modifier = Modifier.padding(5.dp),
+                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_5)),
                 fontSize = 18.sp,
                 fontFamily = FontFamily.Serif)
         }
-        Column(modifier = Modifier
-            .height(80.dp)
-            .padding(5.dp),
+        Column(
+            modifier = Modifier
+                .height(dimensionResource(id = R.dimen.hegiht_80))
+                .padding(dimensionResource(id = R.dimen.padding_5)),
             verticalArrangement = Arrangement.Bottom,
 
-        ){
+            ){
             Row (horizontalArrangement = Arrangement.SpaceEvenly,
                     modifier = Modifier.fillMaxWidth()){
                     urls.forEach{it -> CardImage(imageUrl = it)}
                 }
-                Spacer(modifier = Modifier.height(6.dp))
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_6)))
             Row (modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center){
                 Text(
@@ -143,7 +148,7 @@ fun InvestmentCard(investmentType: String, onNavigate: () -> Unit, urls : List<I
 fun CardImage(imageUrl: Int ){
     Box(
         modifier = Modifier
-            .size(45.dp)
+            .size(dimensionResource(id = R.dimen.box_asset_img))
             .clip(CircleShape)
             .background(Color.LightGray)
     ) {

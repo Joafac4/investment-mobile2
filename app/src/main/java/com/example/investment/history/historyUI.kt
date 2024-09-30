@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.investment.data.SimulationResult
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,9 +44,9 @@ fun SimulationHistory() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(5.dp)
+            .padding(dimensionResource(id = R.dimen.padding_5))
             .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacer_8))
     ) {
         simulationsList.forEach { simulation ->
             SimulationHistoryCard(simulationResult = simulation) }
