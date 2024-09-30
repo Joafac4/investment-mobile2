@@ -1,5 +1,6 @@
 package com.example.investment.investment
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -30,6 +31,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -49,7 +51,13 @@ fun InvestmentHome(navController: NavHostController){
     val rawsUrls = listOf(R.drawable.gold,R.drawable.oil,R.drawable.trigo)
     val cryptoUrls = listOf(R.drawable.ethereum,R.drawable.bitcoin,R.drawable.solana)
     Surface(modifier = Modifier.fillMaxSize()) {
-        Text(text = stringResource(id = R.string.investment_home))
+        Text(text = stringResource(id = R.string.investment_home),
+            modifier = Modifier.padding(16.dp),
+            textAlign = TextAlign.Center,
+            fontSize = 16.sp,
+            fontFamily = FontFamily.Serif,
+            color = colorResource(id = R.color.purple_700)
+        )
         Column(modifier = Modifier.height(150.dp),
             verticalArrangement = Arrangement.Center
             ){
@@ -93,8 +101,9 @@ fun InvestmentCard(investmentType: String, onNavigate: () -> Unit, urls : List<I
             .height(120.dp)
             .fillMaxWidth(),
         colors = CardDefaults.cardColors(
-            containerColor = colorResource(id = R.color.lightgolden)
+            containerColor = colorResource(id = R.color.superLightGolden)
         ),
+        border = BorderStroke(0.95.dp, colorResource(id = R.color.purple_700))
     )  {
         Row (horizontalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
@@ -119,7 +128,7 @@ fun InvestmentCard(investmentType: String, onNavigate: () -> Unit, urls : List<I
                 horizontalArrangement = Arrangement.Center){
                 Text(
                     text = stringResource(id = R.string.investment_card_simulation),
-                    color = colorResource(id = R.color.black),
+                    color = colorResource(id = R.color.purple_700),
                     fontFamily = FontFamily.Serif,
                     modifier = Modifier.clickable {
                         onNavigate()
