@@ -44,8 +44,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.investment.R
@@ -64,8 +66,8 @@ import java.util.Locale
 fun SimulationHome(assets: List<String>) {
     val viewModel: SimulationModel = hiltViewModel<SimulationModel>()
     val loading: StateFlow<Boolean> = viewModel.loadingStockBox
-    var selectedDate by remember { mutableStateOf("") } // Variable para almacenar la fecha seleccionada
-    var selectedCompanies by remember { mutableStateOf(listOf<String>()) } // Variable para almacenar las empresas seleccionadas
+    var selectedDate by remember { mutableStateOf("") }
+    var selectedCompanies by remember { mutableStateOf(listOf<String>()) }
     val historical by viewModel.historical.collectAsState()
     var investmentAmount by remember { mutableStateOf(0.0) }
     val roomViewModel: HistoryViewModel = hiltViewModel<HistoryViewModel>()
@@ -151,7 +153,6 @@ fun SelectSimulationDate(selectedDate: String, onDateSelected: (String) -> Unit)
 
                         Button(
                             onClick = {
-                                // Actualizar la fecha seleccionada y cerrar el DatePicker
                                 datePickerState.selectedDateMillis?.let { millis ->
                                     val newDate = convertMillisToDate(millis)
                                     onDateSelected(newDate)
@@ -171,7 +172,7 @@ fun SelectSimulationDate(selectedDate: String, onDateSelected: (String) -> Unit)
     }
 }
 
-// Función para convertir milisegundos a una fecha en formato legible (yyyy-MM-dd por ejemplo)
+
 fun convertMillisToDate(millis: Long): String {
     val formatter = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
     return formatter.format(java.util.Date(millis))
@@ -180,14 +181,14 @@ fun convertMillisToDate(millis: Long): String {
 
 @Composable
 fun ShowInvestmentAmount(onAmountChanged: (Double) -> Unit) {
-    var inputText by remember { mutableStateOf("") }  // Mantener el estado del texto
+    var inputText by remember { mutableStateOf("") }
 
     OutlinedTextField(
         value = inputText,
         onValueChange = { newText ->
             inputText = newText
-            val amount = newText.toDoubleOrNull() ?: 0.0  // Convertir el texto a Double
-            onAmountChanged(amount)  // Notificar el cambio de monto
+            val amount = newText.toDoubleOrNull() ?: 0.0  // Esto es para convertir el texto a Double
+            onAmountChanged(amount)
         },
         label = { Text(stringResource(id = R.string.investment_simulation_investmentAmountInput_label)) },
         modifier = Modifier
@@ -210,7 +211,7 @@ fun ShowInvestmentOptions(selectedCompanies: List<String>, assets: List<String>,
             .clickable { expanded = !expanded }
     ) {
         Text(
-            text = if (selectedCompanies.isEmpty()) "Select options" else selectedCompanies.joinToString(", "),
+            text = if (selectedCompanies.isEmpty()) stringResource(id = R.string.investment_simulation_optionsTextfield) else selectedCompanies.joinToString(", "),
             modifier = Modifier.padding(16.dp)
         )
 
@@ -265,6 +266,30 @@ fun ShowSimulationResult(historicalPriceResponses: List<HistoricalPriceResponse>
     }
 }
 
+@Preview
+@Composable
+fun SimulationError(){
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = stringResource(id = R.string.investment_simulation_error),
+            fontSize = 18.sp,
+            color = colorResource(id = R.color.red),
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+        Text(
+            text = stringResource(id = R.string.investment_simulation_error_date),
+            fontSize = 16.sp,
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
+    }
+}
+
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun ShowSimulationPerResult(loading: StateFlow<Boolean>,historicalPriceResponse: HistoricalPriceResponse?, selectedDate: String, investmentAmount: Double, roomViewModel: HistoryViewModel) {
@@ -285,9 +310,12 @@ fun ShowSimulationPerResult(loading: StateFlow<Boolean>,historicalPriceResponse:
     val earningsPercentage = calculateEarningsPercentage(closeValueOnSelectedDate,closeValueToday)
     val symbol = historicalPriceResponse?.symbol
     if (symbol == null) {
-        Text("Error: Symbol is null")
         return
     }
+    if (closeValueOnSelectedDate == 0.0){
+        return SimulationError()
+    }
+
 
     if(loading.value) {
         Box(modifier = Modifier.fillMaxSize()) {

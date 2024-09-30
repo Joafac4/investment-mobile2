@@ -11,10 +11,13 @@
     <string name="investment_card_name_naturalTreasures">Natural treasures</string>
     <string name="investment_card_simulation">Simulate</string>
     <string name="investment_simulation_simulationButton">Simulate</string>
+    <string name="investment_simulation_optionsTextfield">Select options</string>
     <string name="investment_simulation_datePicker_label">DOI</string>
     <string name="investment_simulation_datePicker_iconDescription">Select date</string>
     <string name="investment_simulation_investmentAmountInput_label">Enter Investment Amount</string>
     <string name="investment_simulation_card">Investment Results</string>
+    <string name="investment_simulation_error">Error: There was an issue with the simulation of the selected asset.</string>
+    <string name="investment_simulation_error_date">"Please select another date and try again."</string>
     <string name="historial_assetSimulado">Simulación de</string>
     <string name="historial_resultadonominal">Resultado</string>
     <string name="historial_resultadoPorcentual">Resultado porcentual</string>

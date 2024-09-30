@@ -1,6 +1,6 @@
 package com.example.investment.investment.APIservice
 
-import com.example.investment.investment.viewModel.AnalyticsResponse
+
 import retrofit.Call
 import retrofit.http.GET
 import retrofit.http.Path

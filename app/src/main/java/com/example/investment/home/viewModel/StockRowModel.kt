@@ -17,38 +17,25 @@ class StockRowModel @Inject constructor(
     private val apiServiceImpl: ApiServiceImpl,
 ) : ViewModel() {
 
-    private val _loadingStockBox = MutableStateFlow(false)
-    val loadingStockBox = _loadingStockBox.asStateFlow()
 
     private val _box = MutableStateFlow<List<GlobalQuoteContainer>>(emptyList())
     val box = _box.asStateFlow()
-
-    private val _showRetry = MutableStateFlow(false)
-    val showRetry = _showRetry.asStateFlow()
 
     init {
         loadStockBoxes()
     }
 
-    fun retryLoadingBoxes() {
-        loadStockBoxes()
-    }
-
     private fun loadStockBoxes() {
-        _loadingStockBox.value = true
         apiServiceImpl.getGlobalQuote(
             context = context,
             onSuccess = { result ->
                 viewModelScope.launch {
                     _box.emit(_box.value + result)
                 }
-                _showRetry.value = false
             },
             onFail = {
-                _showRetry.value = true
             },
             loadingFinished = {
-                _loadingStockBox.value = false
             }
         )
     }
