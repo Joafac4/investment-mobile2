@@ -30,11 +30,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.investment.R
 
 
-@Preview
-@Composable
-fun HistoryPreview(){
-    SimulationHistory()
-}
 
 @Composable
 fun SimulationHistory() {

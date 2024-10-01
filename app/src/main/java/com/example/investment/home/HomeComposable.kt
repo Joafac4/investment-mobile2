@@ -45,12 +45,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.investment.R
 import com.example.investment.home.viewModel.GlobalQuoteContainer
 import com.example.investment.navigation.InvestmentScreen.*
 
+@Preview
 @Composable
 fun Title() {
     Surface(modifier = Modifier.fillMaxWidth(),
@@ -113,6 +115,7 @@ fun InvestmentCard(navController: NavHostController){
         }
 }
 
+
 @Composable
 fun ButtonWithIcons(
     leadingIcon: ImageVector,
@@ -152,6 +155,7 @@ fun StockRow(globalQuotescontainers : List<GlobalQuoteContainer>){
 
 }
 
+@Preview
 @Composable
 fun NewsFeed(){
     var isExpanded by remember { mutableStateOf(true) }
