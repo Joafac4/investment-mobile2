@@ -27,6 +27,9 @@ class SimulationModel @Inject constructor(
     private val _showRetry = MutableStateFlow(false)
     val showRetry = _showRetry.asStateFlow()
 
+    fun clearSimulationResults(){
+        _historical.value = emptyList()
+    }
 
     fun simulateInvestment(date: String, symbol: String) {
         _loadingStockBox.value = true

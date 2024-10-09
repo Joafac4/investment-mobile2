@@ -15,7 +15,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Surface
@@ -55,16 +57,18 @@ fun InvestmentHome(navController: NavHostController){
     val rawsUrls = listOf(R.drawable.gold,R.drawable.oil,R.drawable.trigo)
     val cryptoUrls = listOf(R.drawable.ethereum,R.drawable.bitcoin,R.drawable.solana)
     Surface(modifier = Modifier.fillMaxSize()) {
-        Text(text = stringResource(id = R.string.investment_home),
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.sixteen)),
-            textAlign = TextAlign.Center,
-            fontSize = 16.sp,
-            fontFamily = FontFamily.Serif,
-            color = colorResource(id = R.color.purple_700)
-        )
-        Column(modifier = Modifier.height(150.dp),
+        Column(modifier = Modifier.height(150.dp)
+            .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Center
             ){
+            Text(text = stringResource(id = R.string.investment_home),
+                modifier = Modifier.padding(dimensionResource(id = R.dimen.sixteen))
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                fontSize = 16.sp,
+                fontFamily = FontFamily.Serif,
+                color = colorResource(id = R.color.purple_700)
+            )
             InvestmentCard(
                 stringResource(id = R.string.investment_card_name_stock),
                 onNavigate = { navController.navigate(InvestmentScreen.Stock.name)},

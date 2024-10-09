@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.DateRange
@@ -86,6 +88,7 @@ fun SimulationHome(assets: List<String>) {
             }
             Button(
                 onClick = {
+                    viewModel.clearSimulationResults()
                     selectedCompanies.forEach { selectedCompany ->
                         viewModel.simulateInvestment(selectedDate,selectedCompany )}
                 },
@@ -208,7 +211,11 @@ fun ShowInvestmentOptions(selectedCompanies: List<String>, assets: List<String>,
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .border(width = dimensionResource(id = R.dimen.border), color = Color.Gray, shape = RectangleShape)
+            .border(
+                width = dimensionResource(id = R.dimen.border),
+                color = Color.Gray,
+                shape = RectangleShape
+            )
             .clickable { expanded = !expanded }
     ) {
         Text(
@@ -257,14 +264,17 @@ fun ShowSimulationGraph(){}
 
 @Composable
 fun ShowSimulationResult(historicalPriceResponses: List<HistoricalPriceResponse>, selectedDate: String, investmentAmount: Double, roomViewModel: HistoryViewModel, loading: StateFlow<Boolean>){
-    historicalPriceResponses.forEach {  ShowSimulationPerResult(
+    Column (modifier = Modifier.verticalScroll(rememberScrollState())){
+        historicalPriceResponses.forEach {  ShowSimulationPerResult(
         historicalPriceResponse = it ,
         selectedDate = selectedDate,
         investmentAmount = investmentAmount,
         roomViewModel = roomViewModel,
         loading = loading
     )
+        }
     }
+
 }
 
 @Preview
