@@ -25,13 +25,13 @@
     <string name="news_user">_@WBuffet</string>
     <string name="news_time">United Kingdom - 3 minutes ago</string>
     <string name="news_tweet">I have made both, good and bad investments. But I only regret about one kind, the once I never made.</string>
-    <string name="asset_stock_AAPL">AAPL</string>
-    <string name="asset_stock_IBM">IBM</string>
-    <string name="asset_stock_GOOGL">GOOGL</string>
-    <string name="asset_crypto_BTC">BTC</string>
-    <string name="asset_crypto_ETH">ETH</string>
-    <string name="asset_forex_EUR">EUR</string>
-    <string name="asset_forex_USD">USD</string>
-    <string name="asset_raws_ALIUSD">ALIUSD</string>
-    <string name="asset_raws_CLUSD">CLUSD</string>
+    <string name="asset_stock_AAPL" translatable="false">AAPL</string>
+    <string name="asset_stock_IBM" translatable="false">IBM</string>
+    <string name="asset_stock_GOOGL" translatable="false">GOOGL</string>
+    <string name="asset_crypto_BTC" translatable="false">BTC</string>
+    <string name="asset_crypto_ETH" translatable="false">ETH</string>
+    <string name="asset_forex_EUR" translatable="false">EUR</string>
+    <string name="asset_forex_USD" translatable="false">USD</string>
+    <string name="asset_raws_ALIUSD" translatable="false">ALIUSD</string>
+    <string name="asset_raws_CLUSD" translatable="false">CLUSD</string>
 </resources>
