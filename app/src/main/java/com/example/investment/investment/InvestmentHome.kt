@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -56,18 +57,21 @@ fun InvestmentHome(navController: NavHostController){
     val stockUrsl = listOf(R.drawable.google,R.drawable.msft_logo,R.drawable.applelogo)
     val rawsUrls = listOf(R.drawable.gold,R.drawable.oil,R.drawable.trigo)
     val cryptoUrls = listOf(R.drawable.ethereum,R.drawable.bitcoin,R.drawable.solana)
-    Surface(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier.height(150.dp)
-            .verticalScroll(rememberScrollState()),
+    Surface(modifier = Modifier.fillMaxSize()
+    ) {
+        Column(modifier = Modifier
+            .height(150.dp)
+            .verticalScroll(rememberScrollState())
+            .background(MaterialTheme.colorScheme.background),
             verticalArrangement = Arrangement.Center
             ){
             Text(text = stringResource(id = R.string.investment_home),
-                modifier = Modifier.padding(dimensionResource(id = R.dimen.sixteen))
+                modifier = Modifier
+                    .padding(dimensionResource(id = R.dimen.sixteen))
                     .fillMaxWidth(),
                 textAlign = TextAlign.Center,
                 fontSize = 16.sp,
                 fontFamily = FontFamily.Serif,
-                color = colorResource(id = R.color.purple_700)
             )
             InvestmentCard(
                 stringResource(id = R.string.investment_card_name_stock),

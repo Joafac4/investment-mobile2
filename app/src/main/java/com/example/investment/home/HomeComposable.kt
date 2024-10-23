@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -55,17 +59,15 @@ import com.example.investment.navigation.InvestmentScreen.*
 @Preview
 @Composable
 fun Title() {
-    Surface(modifier = Modifier.fillMaxWidth(),
-        ) {
         Text(
             text = stringResource(id = R.string.home_title),
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.sixteen)),
+            modifier = Modifier
+                .padding(dimensionResource(id = R.dimen.sixteen))
+                .fillMaxWidth(),
             textAlign = TextAlign.Center,
             fontSize = 32.sp,
             fontFamily = FontFamily.Serif,
-            color = colorResource(id = R.color.purple_700)
         )
-    }
 }
 
 
@@ -80,7 +82,7 @@ fun InvestmentCard(navController: NavHostController){
             .wrapContentHeight()
             .height(dimensionResource(id = R.dimen.hom_investmentCard_height)),
         colors = CardDefaults.cardColors(
-            containerColor = colorResource(id = R.color.superLightGolden)
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer
         )
 
     ) {
@@ -181,17 +183,38 @@ fun NewsFeed(){
             enter = expandVertically(),
             exit = shrinkVertically()
         ) {
-            Column(modifier = Modifier.padding(dimensionResource(id = R.dimen.sixteen))) {
-                Text(text = stringResource(id = R.string.news_user),
-                    color = colorResource(id = R.color.purple_700)
-                    )
-                Text(text = stringResource(id = R.string.news_time))
-                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_8)))
-                Text(
-                    text = stringResource(id = R.string.news_tweet),
+            Column (modifier = Modifier.verticalScroll(rememberScrollState()),){
+                TweetColumn(
+                    name = stringResource(id = R.string.news_user),
+                    time = stringResource(id = R.string.news_time),
+                    tweet = stringResource(id = R.string.news_tweet)
                 )
+                TweetColumn(
+                    name = stringResource(id = R.string.john_Bogle),
+                    time = stringResource(id = R.string.news_time),
+                    tweet = stringResource(id = R.string.Bogle_tweet)
+                )
+                TweetColumn(
+                    name = stringResource(id = R.string.musk), 
+                    time = stringResource(id = R.string.SA),
+                    tweet = stringResource(id = R.string.Musk_tweet))
+                
             }
         }
+    }
+}
+
+@Composable
+fun TweetColumn(name:String, time:String, tweet: String){
+    Column(modifier = Modifier.padding(dimensionResource(id = R.dimen.sixteen))) {
+        Text(text = name,
+            color = colorResource(id = R.color.purple_700)
+        )
+        Text(text = time)
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_8)))
+        Text(
+            text = tweet,
+        )
     }
 }
 

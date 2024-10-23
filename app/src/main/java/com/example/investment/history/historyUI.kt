@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.investment.data.SimulationResult
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -67,27 +68,31 @@ fun SimulationHistoryCard(simulationResult: SimulationResult) {
                 text = simulationResult.simulationDate,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                color = colorResource(id = R.color.black)
             )
 
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "${stringResource(id = R.string.historial_assetSimulado)}: ${simulationResult.resourceSimulated}",
                 fontSize = 14.sp,
-                modifier = Modifier.align(Alignment.Start)
+                modifier = Modifier.align(Alignment.Start),
+                color = colorResource(id = R.color.black)
             )
 
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = "${stringResource(id = R.string.historial_resultadonominal)}: ${simulationResult.simulationResult}",
                 fontSize = 14.sp,
-                modifier = Modifier.align(Alignment.Start)
+                modifier = Modifier.align(Alignment.Start),
+                color = colorResource(id = R.color.black)
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = "${stringResource(id = R.string.historial_resultadoPorcentual)}: ${simulationResult.simulationResultPercentage}",
                 fontSize = 14.sp,
-                modifier = Modifier.align(Alignment.Start)
+                modifier = Modifier.align(Alignment.Start),
+                color = colorResource(id = R.color.black)
             )
         }
     }

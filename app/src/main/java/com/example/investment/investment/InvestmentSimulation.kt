@@ -76,7 +76,7 @@ fun SimulationHome(assets: List<String>) {
     val roomViewModel: HistoryViewModel = hiltViewModel<HistoryViewModel>()
 
     Surface(modifier = Modifier.fillMaxSize()) {
-        Column {
+        Column (modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
             SelectSimulationDate(selectedDate) { newDate ->
                 selectedDate = newDate
             }

@@ -25,6 +25,12 @@
     <string name="news_user">_@WBuffet</string>
     <string name="news_time">United Kingdom - 3 minutes ago</string>
     <string name="news_tweet">I have made both, good and bad investments. But I only regret about one kind, the once I never made.</string>
+    <string name="john_Bogle" translatable="false">_@JBogle</string>
+    <string name="america" translatable="false">United States - 7 minutes ago</string>
+    <string name="Bogle_tweet" translatable="false">Do not look for a needle in a haystack, buy the haystack</string>
+    <string name="musk" translatable="false">_@ElonMusk</string>
+    <string name="SA" translatable="false">SA - 11 minutes ago</string>
+    <string name="Musk_tweet" translatable="false">It is time to make money</string>
     <string name="asset_stock_AAPL" translatable="false">AAPL</string>
     <string name="asset_stock_IBM" translatable="false">IBM</string>
     <string name="asset_stock_GOOGL" translatable="false">GOOGL</string>
