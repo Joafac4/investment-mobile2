@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -36,6 +37,7 @@ import com.example.investment.R
 fun SimulationHistory() {
     val historyViewModel = hiltViewModel<HistoryViewModel>()
     val simulationsList by historyViewModel.simulationsList.collectAsState(initial = listOf())
+    val searchQuery by historyViewModel.searchQuery.collectAsState()
 
     Column(
         modifier = Modifier
@@ -44,10 +46,30 @@ fun SimulationHistory() {
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacer_8))
     ) {
+        SearchBar(
+            searchQuery = searchQuery,
+            onSearchQueryChange = { query -> historyViewModel.updateSearchQuery(query) }
+        )
         simulationsList.forEach { simulation ->
             SimulationHistoryCard(simulationResult = simulation) }
     }
 }
+
+@Composable
+fun SearchBar(
+    searchQuery: String,
+    onSearchQueryChange: (String) -> Unit
+) {
+    OutlinedTextField(
+        value = searchQuery,
+        onValueChange = onSearchQueryChange,
+        label = { Text(stringResource(id = R.string.historial_filtro)) },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+    )
+}
+
 
 @Composable
 fun SimulationHistoryCard(simulationResult: SimulationResult) {

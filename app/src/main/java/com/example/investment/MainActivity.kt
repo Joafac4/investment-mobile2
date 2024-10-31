@@ -62,7 +62,7 @@ class MainActivity : FragmentActivity() {
 
     @Composable
     fun Authentication(viewModel: MainActivityViewModel) {
-        val context = LocalContext.current
+        val context = LocalContext.current as FragmentActivity
         val isAuthenticated by viewModel.isAuthenticated.collectAsState()
         val biometricManager = remember { BiometricManager.from(context) }
         val isBiometricAvailable = remember {
@@ -73,10 +73,8 @@ class MainActivity : FragmentActivity() {
                 // Las características biométricas están disponibles
                 if (!isAuthenticated) {
                     // Si no está autenticado, iniciar la autenticación biométrica
-                    Text(text = "Please authenticate using biometrics.")
-                    if (context is FragmentActivity){
                     viewModel.checkAuthentication(context)
-                }}
+                }
             }
 
             BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> {
