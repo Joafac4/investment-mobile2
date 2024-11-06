@@ -48,11 +48,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.investment.R
 import com.example.investment.home.viewModel.GlobalQuoteContainer
 import com.example.investment.navigation.InvestmentScreen.*
+import com.example.investment.ui.theme.homeCardSubtitleDimension
+import com.example.investment.ui.theme.twentySPdimen
+import com.example.investment.ui.theme.homeTitleDimension
+import com.example.investment.ui.theme.twitterNameDimension
 
 @Preview
 @Composable
@@ -63,7 +66,7 @@ fun Title() {
                 .padding(dimensionResource(id = R.dimen.sixteen))
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,
-            fontSize = 32.sp,
+            fontSize = homeTitleDimension,
             fontFamily = FontFamily.Serif,
         )
 }
@@ -89,11 +92,11 @@ fun InvestmentCard(navController: NavHostController){
         ) {
             Text(
                 text = stringResource(id = R.string.card_title),
-                fontSize = 20.sp
+                fontSize = twentySPdimen
             )
             Text(
                 text = stringResource(id = R.string.card_subtitle),
-                fontSize = 12.sp
+                fontSize = homeCardSubtitleDimension
             )
         }
         Row(
@@ -223,15 +226,15 @@ fun StockRowElement(globalQuoteContainer: GlobalQuoteContainer){
     Column {
         Text(
             text = globalQuoteContainer.globalQuote.name,
-            fontSize = 15.sp
+            fontSize = twitterNameDimension
         )
         Text(
             text = globalQuoteContainer.globalQuote.price,
-            fontSize = 20.sp
+            fontSize = twentySPdimen
             )
         Text(
             text = globalQuoteContainer.globalQuote.change,
-            fontSize = 20.sp,
+            fontSize = twentySPdimen,
             color = selectStockChangeColour(globalQuoteContainer.globalQuote.change)
         )
     }

@@ -27,11 +27,11 @@
     <string name="news_time">United Kingdom - 3 minutes ago</string>
     <string name="news_tweet">I have made both, good and bad investments. But I only regret about one kind, the once I never made.</string>
     <string name="john_Bogle" translatable="false">_@JBogle</string>
-    <string name="america" translatable="false">United States - 7 minutes ago</string>
-    <string name="Bogle_tweet" translatable="false">Do not look for a needle in a haystack, buy the haystack</string>
+    <string name="america" >United States - 7 minutes ago</string>
+    <string name="Bogle_tweet" >Do not look for a needle in a haystack, buy the haystack</string>
     <string name="musk" translatable="false">_@ElonMusk</string>
-    <string name="SA" translatable="false">SA - 11 minutes ago</string>
-    <string name="Musk_tweet" translatable="false">It is time to make money</string>
+    <string name="SA" >SA - 11 minutes ago</string>
+    <string name="Musk_tweet" >It is time to make money</string>
     <string name="asset_stock_AAPL" translatable="false">AAPL</string>
     <string name="asset_stock_IBM" translatable="false">IBM</string>
     <string name="asset_stock_GOOGL" translatable="false">GOOGL</string>
@@ -41,4 +41,11 @@
     <string name="asset_forex_USD" translatable="false">USD</string>
     <string name="asset_raws_ALIUSD" translatable="false">ALIUSD</string>
     <string name="asset_raws_CLUSD" translatable="false">CLUSD</string>
+    <string name="auth_biometrics_not_prepared" >This phone is not prepared for biometric features</string>
+    <string name="auth_biometrics_unavailable">Biometric auth is unavailable</string>
+    <string name="auth_sec_update_require">You cannot use biometric auth until you have updated your security details</string>
+    <string name="auth_android_version">You cannot use biometric auth with this Android version</string>
+    <string name="auth_generic">You cannot use biometric auth</string>
+
+
 </resources>

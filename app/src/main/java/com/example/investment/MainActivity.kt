@@ -17,6 +17,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.rememberNavController
 import com.example.investment.navigation.BottomBar
 import com.example.investment.navigation.NavHostComposable
@@ -79,32 +80,32 @@ class MainActivity : FragmentActivity() {
 
             BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> {
                 // No biometric features available on this device
-                Text(text = "This phone is not prepared for biometric features")
+                Text(text = stringResource(id = R.string.auth_biometrics_not_prepared))
             }
 
             BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
                 // Biometric features are currently unavailable.
-                Text(text = "Biometric auth is unavailable")
+                Text(text = stringResource(id = R.string.auth_biometrics_unavailable))
             }
 
             BiometricManager.BIOMETRIC_ERROR_SECURITY_UPDATE_REQUIRED -> {
                 // Biometric features available but a security vulnerability has been discovered
-                Text(text = "You can't use biometric auth until you have updated your security details")
+                Text(text = stringResource(id = R.string.auth_sec_update_require))
             }
 
             BiometricManager.BIOMETRIC_ERROR_UNSUPPORTED -> {
                 // Biometric features are currently unavailable because the specified options are incompatible with the current Android version..
-                Text(text = "You can't use biometric auth with this Android version")
+                Text(text = stringResource(id = R.string.auth_android_version))
             }
 
             BiometricManager.BIOMETRIC_STATUS_UNKNOWN -> {
                 // Unable to determine whether the user can authenticate using biometrics
-                Text(text = "You can't use biometric auth")
+                Text(text = stringResource(id = R.string.auth_generic))
             }
 
             BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
                 // The user can't authenticate because no biometric or device credential is enrolled.
-                Text(text = "You can't use biometric auth")
+                Text(text = stringResource(id = R.string.auth_generic))
             }
         }
     }

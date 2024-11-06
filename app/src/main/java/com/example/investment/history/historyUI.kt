@@ -19,18 +19,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import com.example.investment.data.SimulationResult
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.investment.R
-
+import com.example.investment.ui.theme.historyCardItems
+import com.example.investment.ui.theme.historyTitle
 
 
 @Composable
@@ -66,7 +64,7 @@ fun SearchBar(
         label = { Text(stringResource(id = R.string.historial_filtro)) },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(dimensionResource(id = R.dimen.padding))
     )
 }
 
@@ -74,45 +72,45 @@ fun SearchBar(
 @Composable
 fun SimulationHistoryCard(simulationResult: SimulationResult) {
     Card(
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.card_corner_shape)),
         colors = CardDefaults.cardColors(containerColor = Color(0xFFE0E0E0)),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
+            .padding(dimensionResource(id = R.dimen.padding)),
+        elevation = CardDefaults.cardElevation(dimensionResource(id = R.dimen.shadow))
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(dimensionResource(id = R.dimen.sixteen))
         ) {
             Text(
                 text = simulationResult.simulationDate,
                 fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
+                fontSize = historyTitle,
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 color = colorResource(id = R.color.black)
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_8)))
             Text(
                 text = "${stringResource(id = R.string.historial_assetSimulado)}: ${simulationResult.resourceSimulated}",
-                fontSize = 14.sp,
+                fontSize = historyCardItems,
                 modifier = Modifier.align(Alignment.Start),
                 color = colorResource(id = R.color.black)
             )
 
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.small_spacer)))
             Text(
                 text = "${stringResource(id = R.string.historial_resultadonominal)}: ${simulationResult.simulationResult}",
-                fontSize = 14.sp,
+                fontSize = historyCardItems,
                 modifier = Modifier.align(Alignment.Start),
                 color = colorResource(id = R.color.black)
             )
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.small_spacer)))
             Text(
                 text = "${stringResource(id = R.string.historial_resultadoPorcentual)}: ${simulationResult.simulationResultPercentage}",
-                fontSize = 14.sp,
+                fontSize = historyCardItems,
                 modifier = Modifier.align(Alignment.Start),
                 color = colorResource(id = R.color.black)
             )

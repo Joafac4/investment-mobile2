@@ -49,8 +49,6 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.investment.R
@@ -59,6 +57,8 @@ import com.example.investment.history.HistoryViewModel
 import com.example.investment.investment.APIservice.HistoricalPriceResponse
 import com.example.investment.investment.viewModel.SimulationModel
 import com.example.investment.ui.theme.PurpleGrey80
+import com.example.investment.ui.theme.historyTitle
+import com.example.investment.ui.theme.investmentHomeCardTitle
 import kotlinx.coroutines.flow.StateFlow
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -283,20 +283,20 @@ fun SimulationError(){
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(dimensionResource(id = R.dimen.sixteen)),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Text(
             text = stringResource(id = R.string.investment_simulation_error),
-            fontSize = 18.sp,
+            fontSize = investmentHomeCardTitle,
             color = colorResource(id = R.color.red),
-            modifier = Modifier.padding(bottom = 16.dp)
+            modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.sixteen))
         )
         Text(
             text = stringResource(id = R.string.investment_simulation_error_date),
-            fontSize = 16.sp,
-            modifier = Modifier.padding(bottom = 24.dp)
+            fontSize = historyTitle,
+            modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.tf))
         )
     }
 }
@@ -332,7 +332,7 @@ fun ShowSimulationPerResult(loading: StateFlow<Boolean>,historicalPriceResponse:
         Box(modifier = Modifier.fillMaxSize()) {
             CircularProgressIndicator(
                 modifier = Modifier
-                    .size(64.dp)
+                    .size(dimensionResource(id = R.dimen.simDate_height))
                     .align(Alignment.Center),
                 color = PurpleGrey80,
                 trackColor = PurpleGrey80,
@@ -344,7 +344,7 @@ fun ShowSimulationPerResult(loading: StateFlow<Boolean>,historicalPriceResponse:
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(dimensionResource(id = R.dimen.sixteen)),
         ) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
@@ -354,7 +354,7 @@ fun ShowSimulationPerResult(loading: StateFlow<Boolean>,historicalPriceResponse:
                 Text(
                     text = stringResource(id = R.string.investment_simulation_card),
                     style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.padding(bottom = 8.dp)
+                    modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.spacer_8))
                 )
 
 
@@ -365,7 +365,7 @@ fun ShowSimulationPerResult(loading: StateFlow<Boolean>,historicalPriceResponse:
                     Text(
                         text = earnings,
                         style = MaterialTheme.typography.titleLarge,
-                        modifier = Modifier.padding(end = 8.dp),
+                        modifier = Modifier.padding(end = dimensionResource(id = R.dimen.spacer_8)),
                         color = getResultColor(earnings)
                     )
                     Text(

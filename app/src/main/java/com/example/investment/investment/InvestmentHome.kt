@@ -25,14 +25,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.example.investment.R
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerIcon
-import androidx.compose.ui.input.pointer.PointerIcon.Companion.Hand
-import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
@@ -40,9 +36,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.investment.navigation.InvestmentScreen
+import com.example.investment.ui.theme.historyTitle
+import com.example.investment.ui.theme.investmentHomeCardTitle
 
 
 @Preview
@@ -60,7 +57,7 @@ fun InvestmentHome(navController: NavHostController){
     Surface(modifier = Modifier.fillMaxSize()
     ) {
         Column(modifier = Modifier
-            .height(150.dp)
+            .height(dimensionResource(id = R.dimen.oneFif))
             .verticalScroll(rememberScrollState())
             .background(MaterialTheme.colorScheme.background),
             verticalArrangement = Arrangement.Center
@@ -70,7 +67,7 @@ fun InvestmentHome(navController: NavHostController){
                     .padding(dimensionResource(id = R.dimen.sixteen))
                     .fillMaxWidth(),
                 textAlign = TextAlign.Center,
-                fontSize = 16.sp,
+                fontSize = historyTitle,
                 fontFamily = FontFamily.Serif,
             )
             InvestmentCard(
@@ -122,7 +119,7 @@ fun InvestmentCard(investmentType: String, onNavigate: () -> Unit, urls : List<I
         ) {
             Text(text = investmentType,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_5)),
-                fontSize = 18.sp,
+                fontSize = investmentHomeCardTitle,
                 fontFamily = FontFamily.Serif)
         }
         Column(
