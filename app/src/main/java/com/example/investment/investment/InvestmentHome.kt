@@ -81,11 +81,6 @@ fun InvestmentHome(navController: NavHostController){
                 cryptoUrls,
                     )
             InvestmentCard(
-                stringResource(id = R.string.investment_card_name_naturalTreasures),
-                    onNavigate = { navController.navigate(InvestmentScreen.Stock.name)},
-                stockUrsl,
-                )
-            InvestmentCard(
                 stringResource(id = R.string.investment_card_name_forex),
                     onNavigate = { navController.navigate(InvestmentScreen.Forex.name)},
                 forexUrls,

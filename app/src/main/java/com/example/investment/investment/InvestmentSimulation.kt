@@ -111,7 +111,7 @@ fun SimulationHome(assets: List<String>) {
 fun SelectSimulationDate(selectedDate: String, onDateSelected: (String) -> Unit) {
     var showDatePicker by remember { mutableStateOf(false) }
     val datePickerState = rememberDatePickerState()
-
+    val todayMillis = System.currentTimeMillis()
 
     Box(
         modifier = Modifier.fillMaxWidth()
@@ -134,7 +134,6 @@ fun SelectSimulationDate(selectedDate: String, onDateSelected: (String) -> Unit)
                 .height(dimensionResource(id = R.dimen.simDate_height))
         )
 
-
         if (showDatePicker) {
             Popup(
                 onDismissRequest = { showDatePicker = false },
@@ -154,12 +153,17 @@ fun SelectSimulationDate(selectedDate: String, onDateSelected: (String) -> Unit)
                             showModeToggle = false
                         )
 
-
                         Button(
                             onClick = {
                                 datePickerState.selectedDateMillis?.let { millis ->
-                                    val newDate = convertMillisToDate(millis)
-                                    onDateSelected(newDate)
+                                    // Validate that the selected date is today or earlier
+                                    if (millis <= todayMillis) {
+                                        val newDate = convertMillisToDate(millis)
+                                        onDateSelected(newDate)
+                                    } else {
+                                        // Show error or handle future date selection
+                                        println("Selected date is in the future.")
+                                    }
                                 }
                                 showDatePicker = false
                             },
@@ -175,7 +179,6 @@ fun SelectSimulationDate(selectedDate: String, onDateSelected: (String) -> Unit)
         }
     }
 }
-
 
 fun convertMillisToDate(millis: Long): String {
     val formatter = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
@@ -257,9 +260,6 @@ fun ShowInvestmentOptions(selectedCompanies: List<String>, assets: List<String>,
     }
 }
 
-
-@Composable
-fun ShowSimulationGraph(){}
 
 
 @Composable
