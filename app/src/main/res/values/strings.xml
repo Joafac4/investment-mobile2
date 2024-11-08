@@ -46,6 +46,9 @@
     <string name="auth_sec_update_require">You cannot use biometric auth until you have updated your security details</string>
     <string name="auth_android_version">You cannot use biometric auth with this Android version</string>
     <string name="auth_generic">You cannot use biometric auth</string>
+    <string name="toast_analytics">Cannot get analytics</string>
+    <string name="toast_stocks">Cannot get stock values</string>
+    <string name="toast_simul_date">Cannot pick a future date</string>
 
 
 </resources>

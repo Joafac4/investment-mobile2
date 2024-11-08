@@ -1,9 +1,7 @@
 package com.example.investment.investment.APIservice
 
 import android.content.Context
-import android.util.Log
 import android.widget.Toast
-import androidx.compose.ui.res.stringResource
 import com.example.investment.R
 import retrofit.GsonConverterFactory
 import retrofit.Retrofit
@@ -42,7 +40,7 @@ class ApiServiceImpl @Inject constructor() {
             }
 
             override fun onFailure(t: Throwable?) {
-                Toast.makeText(context, "Can't get analytics", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, context.getString(R.string.toast_analytics), Toast.LENGTH_SHORT).show()
                 onFail()
                 loadingFinished()
             }

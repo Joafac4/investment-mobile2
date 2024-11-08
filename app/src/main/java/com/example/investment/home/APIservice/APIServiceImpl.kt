@@ -57,7 +57,7 @@ class ApiServiceImpl @Inject constructor() {
             }
 
             override fun onFailure(t: Throwable?) {
-                Toast.makeText(context, "Can't get StockValues", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, context.getString(R.string.toast_stocks), Toast.LENGTH_SHORT).show()
                 onFail()
                 loadingFinished()
             }

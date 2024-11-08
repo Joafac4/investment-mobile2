@@ -1,6 +1,7 @@
 package com.example.investment.investment
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -63,6 +64,8 @@ import kotlinx.coroutines.flow.StateFlow
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import android.content.Context
+import androidx.compose.ui.platform.LocalContext
 
 
 @Composable
@@ -112,6 +115,7 @@ fun SelectSimulationDate(selectedDate: String, onDateSelected: (String) -> Unit)
     var showDatePicker by remember { mutableStateOf(false) }
     val datePickerState = rememberDatePickerState()
     val todayMillis = System.currentTimeMillis()
+    val context = LocalContext.current
 
     Box(
         modifier = Modifier.fillMaxWidth()
@@ -162,7 +166,7 @@ fun SelectSimulationDate(selectedDate: String, onDateSelected: (String) -> Unit)
                                         onDateSelected(newDate)
                                     } else {
                                         // Show error or handle future date selection
-                                        println("Selected date is in the future.")
+                                        Toast.makeText(context, context.getString(R.string.toast_simul_date),Toast.LENGTH_SHORT).show()
                                     }
                                 }
                                 showDatePicker = false
