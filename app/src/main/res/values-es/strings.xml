@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Inversión</string>
+    <string name="home_title">Tus finanzas</string>
+    <string name="card_title">¡¡Los mercados están en llamas!!</string>
+    <string name="card_subtitle">No pierdas ninguna oportunidad de obtener ganancias.</string>
+    <string name="investment_home">Simular inversiones</string>
+    <string name="investment_card_name_stock">Cepo</string>
+    <string name="investment_card_name_crypto">Cripto</string>
+    <string name="investment_card_name_raws">Crudo</string>
+    <string name="investment_card_name_forex">Forex</string>
+    <string name="investment_card_name_naturalTreasures">Tesoros naturales</string>
+    <string name="investment_card_simulation">Simular</string>
+    <string name="investment_simulation_simulationButton">Simular</string>
+    <string name="investment_simulation_optionsTextfield">Seleccionar opciones</string>
+    <string name="investment_simulation_datePicker_label">DOI</string>
+    <string name="investment_simulation_datePicker_iconDescription">Seleccionar fecha</string>
+    <string name="investment_simulation_investmentAmountInput_label">Ingrese el monto de la inversión</string>
+    <string name="investment_simulation_card">Resultados de la inversión</string>
+    <string name="investment_simulation_error">Error: hubo un problema con la simulación del activo seleccionado.</string>
+    <string name="investment_simulation_error_date">\"Seleccione otra fecha e inténtelo de nuevo\".</string>
+    <string name="historial_assetSimulado">Activo simulado</string>
+    <string name="historial_resultadonominal">Resultado</string>
+    <string name="historial_resultadoPorcentual">Resultado porcentual</string>
+    <string name="historial_filtro">Buscar por activo</string>
+    <string name="news_feed">Servicio de noticias</string>
+    <string name="news_user" translatable="false">_@WBuffet</string>
+    <string name="news_time">Reino Unido - Hace 3 minutos</string>
+    <string name="news_tweet">He hecho inversiones buenas y malas. Pero sólo me arrepiento de un tipo, el que nunca hice.</string>
+    <string name="john_Bogle" translatable="false">_@JBogle</string>
+    <string name="america" >Estados Unidos - Hace 7 minutos</string>
+    <string name="Bogle_tweet" >No busques una aguja en un pajar, compra el pajar</string>
+    <string name="musk" translatable="false">_@ElonMusk</string>
+    <string name="SA" >SA - Hace 11 minutos</string>
+    <string name="Musk_tweet" >Es hora de ganar dinero</string>
+    <string name="asset_stock_AAPL" translatable="false">AAPL</string>
+    <string name="asset_stock_IBM" translatable="false">IBM</string>
+    <string name="asset_stock_GOOGL" translatable="false">GOOGL</string>
+    <string name="asset_crypto_BTC" translatable="false">BTC</string>
+    <string name="asset_crypto_ETH" translatable="false">ETH</string>
+    <string name="asset_forex_EUR" translatable="false">EUR</string>
+    <string name="asset_forex_USD" translatable="false">USD</string>
+    <string name="asset_raws_ALIUSD" translatable="false">ALIUSD</string>
+    <string name="asset_raws_CLUSD" translatable="false">CLUSD</string>
+    <string name="auth_biometrics_not_prepared" >Este teléfono no está preparado para funciones biométricas.</string>
+    <string name="auth_biometrics_unavailable">La autenticación biométrica no está disponible</string>
+    <string name="auth_sec_update_require">No puede utilizar la autenticación biométrica hasta que haya actualizado sus datos de seguridad</string>
+    <string name="auth_android_version">No puedes usar la autenticación biométrica con esta versión de Android</string>
+    <string name="auth_generic">No puedes utilizar la autenticación biométrica.</string>
+    <string name="toast_analytics">No se pudo obtener el análisis</string>
+    <string name="toast_stocks">No se pueden obtener los valores de las acciones</string>
+    <string name="toast_simul_date">No puedo elegir una fecha futura</string>
+
+
+</resources>

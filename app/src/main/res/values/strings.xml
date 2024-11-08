@@ -21,9 +21,9 @@
     <string name="historial_assetSimulado">Asset simulated</string>
     <string name="historial_resultadonominal">Result</string>
     <string name="historial_resultadoPorcentual">Percentage result</string>
-    <string name="historial_filtro" translatable="false">Search by asset</string>
+    <string name="historial_filtro">Search by asset</string>
     <string name="news_feed">News feed</string>
-    <string name="news_user">_@WBuffet</string>
+    <string name="news_user" translatable="false">_@WBuffet</string>
     <string name="news_time">United Kingdom - 3 minutes ago</string>
     <string name="news_tweet">I have made both, good and bad investments. But I only regret about one kind, the once I never made.</string>
     <string name="john_Bogle" translatable="false">_@JBogle</string>
