@@ -39,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import com.example.investment.navigation.InvestmentScreen
 import com.example.investment.ui.theme.historyTitle
+import com.example.investment.ui.theme.invTitle
 import com.example.investment.ui.theme.investmentHomeCardTitle
 
 
@@ -64,10 +65,10 @@ fun InvestmentHome(navController: NavHostController){
             ){
             Text(text = stringResource(id = R.string.investment_home),
                 modifier = Modifier
-                    .padding(dimensionResource(id = R.dimen.sixteen))
+                    .padding(dimensionResource(id = R.dimen.inv_home_title))
                     .fillMaxWidth(),
                 textAlign = TextAlign.Center,
-                fontSize = historyTitle,
+                fontSize = invTitle,
                 fontFamily = FontFamily.Serif,
             )
             InvestmentCard(

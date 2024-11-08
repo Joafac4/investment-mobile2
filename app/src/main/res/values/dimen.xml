@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="inv_home_title">30dp</dimen>
     <dimen name="sixteen">16dp</dimen>
     <dimen name="hom_investmentCard_height">200dp</dimen>
     <dimen name="h_invcard_padding">26dp</dimen>

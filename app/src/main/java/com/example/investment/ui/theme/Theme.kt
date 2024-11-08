@@ -17,7 +17,7 @@ private val DarkColorScheme = darkColorScheme(
     background = DarkBlue,
     tertiaryContainer = SuperLightGolden,
 
-    onPrimary = Black,               // Texto sobre fondo `primary` (Black), debe ser blanco.
+    onPrimary = Black,
     onSecondary = White,
 )
 
@@ -28,7 +28,8 @@ private val LightColorScheme = lightColorScheme(
     background = White,
     tertiaryContainer = SuperLightGolden,
 
-    onPrimary = White,               // Texto sobre fondo `primary` (Black), debe ser blanco.
+
+    onPrimary = White,
     onSecondary = Black,
     onTertiary = Black
 

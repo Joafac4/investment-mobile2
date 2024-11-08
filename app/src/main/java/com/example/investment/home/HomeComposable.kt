@@ -189,6 +189,7 @@ fun NewsFeed(){
                     name = stringResource(id = R.string.news_user),
                     time = stringResource(id = R.string.news_time),
                     tweet = stringResource(id = R.string.news_tweet)
+
                 )
                 TweetColumn(
                     name = stringResource(id = R.string.john_Bogle),
@@ -209,7 +210,7 @@ fun NewsFeed(){
 fun TweetColumn(name:String, time:String, tweet: String){
     Column(modifier = Modifier.padding(dimensionResource(id = R.dimen.sixteen))) {
         Text(text = name,
-            color = colorResource(id = R.color.purple_700)
+            color = colorResource(id = R.color.strong_golden)
         )
         Text(text = time)
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_8)))
